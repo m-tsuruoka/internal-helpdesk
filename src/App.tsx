@@ -6,10 +6,7 @@ import { InquiryDetailPage } from "./pages/InquiryDetailPage";
 import { InquiryCreatePage } from "./pages/InquiryCreatePage";
 
 // 最初の初期データ（配列）
-const INITIAL_INQUIRIES: Inquiry[] = [
-  { id: 1, title: "PC が起動しない", content: "電源が入りません。", requester: "山田", status: "pending", created_at: "2026-06-01" },
-  { id: 2, title: "Wi-Fi に接続できない", content: "急に切れました。", requester: "鈴木", status: "in_progress", created_at: "2026-06-02" },
-];
+const INITIAL_INQUIRIES: Inquiry[] = [];
 
 type Page = "list" | "detail" | "create";
 
@@ -57,17 +54,23 @@ function App() {
     setCurrentPage("list");
   };
 
+const handleDelete = (id: number) => {
+  // 渡されたID「以外」のデータだけを残して、新しいデータで上書きする！
+  setInquiries(prev => prev.filter(item => item.id !== id));
+};
+
   return (
     <div>
-      <nav style={{ padding: "10px", background: "#eee", marginBottom: "20px" }}>
-        <button onClick={() => setCurrentPage("list")} style={{ marginRight: "10px" }}>一覧</button>
-        <button onClick={() => setCurrentPage("create")}>新規登録</button>
+      <nav style={{textAlign:"center", padding: "10px", background: "#ff9d00", marginBottom: "20px" }}>
+        <button style={{color:"#fff",border:"none",borderRadius:"20px", background:"#ee32c5", marginRight: "10px" }} onClick={() => setCurrentPage("list")} >一覧</button>
+        <button style={{color:"#fff",border:"none",borderRadius:"20px", background:"#00bfff", marginRight: "10px" }}  onClick={() => setCurrentPage("create")}>新規登録</button>
       </nav>
 
-      <main style={{ padding: "0 20px" }}>
+      <main style={{ textAlign:"center", padding: "0 20px" }}>
         {/* ① 一覧画面：配列データをそのまま丸ごと渡す */}
         {currentPage === "list" && (
-          <InquiryListPage inquiries={inquiries} onSelectInquiry={handleSelectInquiry} />
+          <InquiryListPage inquiries={inquiries} onSelectInquiry={handleSelectInquiry}
+          onDelete={handleDelete}/>
         )}
 
         {/* ② 詳細画面：配列の中から、特定のIDの1件だけを .find() で探して渡す */}
