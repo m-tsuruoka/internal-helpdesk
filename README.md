@@ -9,12 +9,15 @@
 - 新規登録
 - ステータス更新（未対応 / 対応中 / 完了）
 - ステータスでのフィルタリング
+- idでの並び替え
+- 削除機能
 
 ## 技術スタック
 
-- React 19.x
-- TypeScript 6.x
-- Vite 8.x
+- React 19.2.7
+- TypeScript 6.0.3
+- Vite 8.0.16
+- react-hook-form
 
 ## 起動方法
 
