@@ -49,7 +49,6 @@ export const InquiryRow = ({ inquiry, onSelect, onDelete }: InquiryRowProps) => 
       
       <td style={tdStyle}>{inquiry.created_at}</td>
       
-      {/* ⚠️ ここが修正ポイント！削除ボタンも必ず <td> で囲みます */}
       <td style={{ ...tdStyle, textAlign: "center" }}>
         <button 
           onClick={() => {

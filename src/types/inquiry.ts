@@ -1,6 +1,7 @@
 //型をまとめる
 export type InquiryStatus = "pending" | "in_progress" | "completed";
 
+//ステータスを日本語に変換
 export const inquiryStatusLabel: Record<InquiryStatus, string> = {
   pending: "未対応",
   in_progress: "対応中",

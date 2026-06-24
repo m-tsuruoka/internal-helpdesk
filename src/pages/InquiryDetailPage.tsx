@@ -35,8 +35,8 @@ export const InquiryDetailPage = ({ inquiry, onBack, onStatusChange }: InquiryDe
         
         {/* 左側：投稿者と日付 */}
         <div style={{ color: "#6c757d", fontSize: "0.95rem" }}>
-          <span style={{ marginRight: "20px" }}>👤 投稿者: <strong style={{ color: "#495057" }}>{inquiry.requester}</strong></span>
-          <span>📅 投稿日: {inquiry.created_at}</span>
+          <span style={{ marginRight: "20px" }}>投稿者: <strong style={{ color: "#495057" }}>{inquiry.requester}</strong></span>
+          <span>投稿日: {inquiry.created_at}</span>
         </div>
 
         {/* 右側：ステータス確認＆操作エリア */}
