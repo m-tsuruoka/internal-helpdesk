@@ -15,11 +15,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $admin = User::create([
+            'name'     => '管理者',
+            'email'    => 'admin@example.com',
+            'password' => 'password123',
+        ]);
+        $admin->is_admin = true;
+        $admin->save();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // 一般ユーザー（is_admin は DB デフォルトの false のまま）
+        User::create([
+            'name'     => '一般ユーザー',
+            'email'    => 'user@example.com',
+            'password' => 'password123',
         ]);
     }
 }

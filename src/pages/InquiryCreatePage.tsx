@@ -199,46 +199,171 @@ export const InquiryCreatePage = ({ onCreated, onBack }: InquiryCreatePageProps)
   }
 
   return (
-    <div>
-      <button onClick={onBack}>← 一覧へ戻る</button>
-      <h2>新規問い合わせ</h2>
+<div style={{
+      maxWidth: '600px',
+      margin: '0 auto',
+      padding: '24px',
+      fontFamily: 'sans-serif',
+      color: '#1f2937'
+    }}>
+      {/* 控えめな戻るボタン（新規登録画面と同じテキストリンク風） */}
+      <button 
+        onClick={onBack}
+        style={{
+          background: 'none',
+          border: 'none',
+          color: '#4b5563',
+          cursor: 'pointer',
+          fontSize: '14px',
+          padding: 0,
+          marginBottom: '16px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '4px',
+          fontWeight: '500'
+        }}
+        onMouseOver={(e) => e.currentTarget.style.color = '#1f2937'}
+        onMouseOut={(e) => e.currentTarget.style.color = '#4b5563'}
+      >
+        ← 一覧へ戻る
+      </button>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>タイトル</label>
+      <h2 style={{ 
+        fontSize: '22px', 
+        fontWeight: '600', 
+        marginBottom: '24px',
+        borderBottom: '2px solid #e5e7eb',
+        paddingBottom: '8px'
+      }}>
+        新規問い合わせ
+      </h2>
+
+      <form 
+        onSubmit={handleSubmit(onSubmit)}
+        style={{
+          backgroundColor: '#ffffff',
+          padding: '28px',
+          borderRadius: '12px',
+          boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+          border: '1px solid #e5e7eb',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '20px'
+        }}
+      >
+        {/* タイトル */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          <label style={{ fontSize: '14px', fontWeight: '600', color: '#374151' }}>
+            タイトル
+          </label>
           <input
             {...register('title', {
               required: 'タイトルを入力してください',
               maxLength: { value: 100, message: '100文字以内で入力してください' },
             })}
+            style={{
+              padding: '10px 12px',
+              fontSize: '15px',
+              border: errors.title ? '1px solid #ef4444' : '1px solid #d1d5db',
+              borderRadius: '6px',
+              backgroundColor: '#f9fafb',
+              outline: 'none',
+              transition: 'border-color 0.2s'
+            }}
+            onFocus={(e) => e.currentTarget.style.borderColor = errors.title ? '#ef4444' : '#3b82f6'}
+            onBlur={(e) => e.currentTarget.style.borderColor = errors.title ? '#ef4444' : '#d1d5db'}
           />
-          {errors.title && <p style={{ color: 'red' }}>{errors.title.message}</p>}
+          {errors.title && (
+            <p style={{ color: '#ef4444', fontSize: '13px', margin: '4px 0 0 0', fontWeight: '500' }}>
+              ⚠️ {errors.title.message}
+            </p>
+          )}
         </div>
 
-        <div>
-          <label>内容</label>
+        {/* 内容 */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          <label style={{ fontSize: '14px', fontWeight: '600', color: '#374151' }}>
+            内容
+          </label>
           <textarea
             {...register('content', {
               required: '内容を入力してください',
               maxLength: { value: 1000, message: '1000文字以内で入力してください' },
             })}
-            rows={4}
+            rows={5}
+            style={{
+              padding: '10px 12px',
+              fontSize: '15px',
+              border: errors.content ? '1px solid #ef4444' : '1px solid #d1d5db',
+              borderRadius: '6px',
+              backgroundColor: '#f9fafb',
+              outline: 'none',
+              resize: 'vertical',
+              transition: 'border-color 0.2s'
+            }}
+            onFocus={(e) => e.currentTarget.style.borderColor = errors.content ? '#ef4444' : '#3b82f6'}
+            onBlur={(e) => e.currentTarget.style.borderColor = errors.content ? '#ef4444' : '#d1d5db'}
           />
-          {errors.content && <p style={{ color: 'red' }}>{errors.content.message}</p>}
+          {errors.content && (
+            <p style={{ color: '#ef4444', fontSize: '13px', margin: '4px 0 0 0', fontWeight: '500' }}>
+              ⚠️ {errors.content.message}
+            </p>
+          )}
         </div>
 
-        <div>
-          <label>投稿者名</label>
+        {/* 投稿者名 */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          <label style={{ fontSize: '14px', fontWeight: '600', color: '#374151' }}>
+            投稿者名
+          </label>
           <input
             {...register('requester', {
               required: '投稿者名を入力してください',
               maxLength: { value: 100, message: '100文字以内で入力してください' },
             })}
+            style={{
+              padding: '10px 12px',
+              fontSize: '15px',
+              border: errors.requester ? '1px solid #ef4444' : '1px solid #d1d5db',
+              borderRadius: '6px',
+              backgroundColor: '#f9fafb',
+              outline: 'none',
+              transition: 'border-color 0.2s'
+            }}
+            onFocus={(e) => e.currentTarget.style.borderColor = errors.requester ? '#ef4444' : '#3b82f6'}
+            onBlur={(e) => e.currentTarget.style.borderColor = errors.requester ? '#ef4444' : '#d1d5db'}
           />
-          {errors.requester && <p style={{ color: 'red' }}>{errors.requester.message}</p>}
+          {errors.requester && (
+            <p style={{ color: '#ef4444', fontSize: '13px', margin: '4px 0 0 0', fontWeight: '500' }}>
+              ⚠️ {errors.requester.message}
+            </p>
+          )}
         </div>
 
-        <button type="submit" disabled={isSubmitting}>
+        {/* 送信ボタン */}
+        <button 
+          type="submit" 
+          disabled={isSubmitting}
+          style={{
+            marginTop: '8px',
+            padding: '12px',
+            fontSize: '16px',
+            fontWeight: '600',
+            color: '#ffffff',
+            backgroundColor: isSubmitting ? '#9ca3af' : '#2563eb', // 送信中はグレーアウト
+            border: 'none',
+            borderRadius: '6px',
+            cursor: isSubmitting ? 'not-allowed' : 'pointer',
+            transition: 'background-color 0.2s',
+            boxShadow: isSubmitting ? 'none' : '0 2px 4px 0 rgba(37, 99, 235, 0.2)'
+          }}
+          onMouseOver={(e) => {
+            if (!isSubmitting) e.currentTarget.style.backgroundColor = '#1d4ed8';
+          }}
+          onMouseOut={(e) => {
+            if (!isSubmitting) e.currentTarget.style.backgroundColor = '#2563eb';
+          }}
+        >
           {isSubmitting ? '送信中...' : '登録する'}
         </button>
       </form>

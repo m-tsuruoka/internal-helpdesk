@@ -1,7 +1,12 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(),tailwindcss(),],
+  test: {
+    environment: 'jsdom',         // ブラウザ環境をエミュレート
+    globals: true,                // describe/it/expect をインポートなしで使う
+    setupFiles: './src/test/setup.ts',  // テスト前の共通設定
+  },
 })

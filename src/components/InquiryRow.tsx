@@ -7,7 +7,11 @@ type InquiryRowProps = {
   onDelete: (id: number) => void;
 };
 
-export const InquiryRow = ({ inquiry, onSelect, onDelete }: InquiryRowProps) => {
+export const InquiryRow = ({
+  inquiry,
+  onSelect,
+  onDelete,
+}: InquiryRowProps) => {
   // 🎨 セル（td）の共通スタイルを変数化してスッキリさせる
   const tdStyle = {
     padding: "16px 12px", // 上下にゆとりを持たせる
@@ -20,10 +24,10 @@ export const InquiryRow = ({ inquiry, onSelect, onDelete }: InquiryRowProps) => 
     // 行全体にマウスを乗せたときのスタイルを変えたい場合は、CSSクラスを使うとより綺麗ですが、今回はシンプルに書いています
     <tr>
       <td style={tdStyle}>{inquiry.id}</td>
-      
+
       {/* タイトルは「リンク風」にして、クリックできることをアピール */}
       <td style={tdStyle}>
-        <button 
+        <button
           onClick={() => onSelect(inquiry.id)}
           style={{
             background: "transparent",
@@ -34,28 +38,26 @@ export const InquiryRow = ({ inquiry, onSelect, onDelete }: InquiryRowProps) => 
             fontSize: "1rem",
             fontWeight: "bold",
             textDecoration: "underline",
-            textUnderlineOffset: "3px" // 下線を少し離してスッキリ見せる
+            textUnderlineOffset: "3px", // 下線を少し離してスッキリ見せる
           }}
         >
           {inquiry.title}
         </button>
       </td>
-      
+
       <td style={tdStyle}>
         <StatusBadge status={inquiry.status} />
       </td>
-      
+
       <td style={tdStyle}>{inquiry.requester}</td>
-      
+
       <td style={tdStyle}>{inquiry.created_at}</td>
-      
+
       <td style={{ ...tdStyle, textAlign: "center" }}>
-        <button 
-          onClick={() => {
-            const isConfirmed = window.confirm("本当にこの問い合わせを削除しますか？");
-            if (isConfirmed) {
-              onDelete(inquiry.id);
-            }
+        <button
+          onClick={(e) => {
+            e.stopPropagation(); // 💡 裏の行をクリックしちゃうのを防ぐバリア
+            onDelete(inquiry.id); // 💡 ここではアラートを出さず、親にIDだけ渡す！
           }}
           style={{
             padding: "6px 12px",
@@ -66,7 +68,7 @@ export const InquiryRow = ({ inquiry, onSelect, onDelete }: InquiryRowProps) => 
             cursor: "pointer",
             fontSize: "0.85rem",
             fontWeight: "bold",
-            transition: "all 0.2s"
+            transition: "all 0.2s",
           }}
         >
           削除

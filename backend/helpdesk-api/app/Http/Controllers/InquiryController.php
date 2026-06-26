@@ -6,6 +6,7 @@ use App\Models\Inquiry;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Psy\Util\Json;
+use Illuminate\Support\Facades\Gate;
 
 class InquiryController extends Controller
 {
@@ -65,8 +66,11 @@ public function update(Request $request, Inquiry $inquiry): JsonResponse
      */
     public function destroy(Inquiry $inquiry): JsonResponse
     {
-        $inquiry->delete();
+    Gate::authorize('admin');  // 管理者でなければ 403 を返す
 
-        return response()->json(null, 204);
+    $inquiry->delete();
+
+    return response()->json(null, 204);
+
     }
 }

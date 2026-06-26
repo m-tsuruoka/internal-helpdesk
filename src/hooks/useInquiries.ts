@@ -11,8 +11,8 @@ export function useInquiries() {
   //一回だけかフィルターが変わるたびに走る処理
   useEffect(() => {
     //初期化
-    setIsLoading(true);
-    setError(null);
+      setIsLoading(true);
+      setError(null);
 
     //apiを使って取得する
     inquiryApi
@@ -55,7 +55,7 @@ const updateInquiry = async (updated: Inquiry) => {
     } catch (error) {
       // 万が一通信エラーが起きたらここでキャッチする
       console.error("削除に失敗しました", error);
-      alert("データベースの削除に失敗しました。");
+      throw error;
     }
   };
 
